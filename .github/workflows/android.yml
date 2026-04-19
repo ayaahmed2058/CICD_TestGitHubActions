@@ -54,7 +54,7 @@ jobs:
           appId: ${{ secrets.FIREBASE_APP_ID }}
           token: ${{ secrets.FIREBASE_TOKEN }}
           groups: testers
-          file: app/build/outputs/apk/release/TestCICD[${{ github.run_number }}][V${{ env.VERSION_NAME }}].apk
+          file: app/build/outputs/apk/release/TestCICD[$DATE][V$VERSION_NAME].apk
           releaseNotes: "New CI Build ${{ github.run_number }}"
 
       - name: Upload Artifact
