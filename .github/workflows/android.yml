@@ -41,6 +41,12 @@ jobs:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
 
+      - name: Rename APK
+        run: |
+          DATE=$(date +'%d-%m-%Y')
+          mv app/build/outputs/apk/release/*.apk \
+          app/build/outputs/apk/release/TestCICD[$DATE][V$VERSION_NAME].apk
+
       - name: Distribute APK to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
@@ -49,12 +55,6 @@ jobs:
           groups: testers
           file: app/build/outputs/apk/release/app-release.apk
           releaseNotes: "New CI Build ${{ github.run_number }}"
-
-      - name: Rename APK
-        run: |
-          DATE=$(date +'%d-%m-%Y')
-          mv app/build/outputs/apk/release/*.apk \
-          app/build/outputs/apk/release/TestCICD[$DATE][V$VERSION_NAME].apk
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
