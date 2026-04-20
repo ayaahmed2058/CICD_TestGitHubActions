@@ -1,4 +1,3 @@
-
 name: Deploy Android APK to Firebase App Distribution
 
 on:
@@ -114,12 +113,6 @@ jobs:
 
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
-
-#      - name: Authenticate Firebase
-#        run: |
-#          firebase login:ci
-#        env:
-#          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
       - name: Upload to Firebase App Distribution
         env:
