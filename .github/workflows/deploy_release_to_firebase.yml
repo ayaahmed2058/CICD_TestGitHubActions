@@ -112,6 +112,12 @@ jobs:
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
+      - name: Authenticate Firebase
+        run: |
+          firebase login:ci
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
       - name: Upload to Firebase App Distribution
         env:
           GOOGLE_APPLICATION_CREDENTIALS: service-account.json
@@ -126,6 +132,13 @@ jobs:
         with:
           name: release-apk
           path: app/build/outputs/apk/release/*.apk
+
+      - name: Create Tag
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git tag v${VERSION_NAME}
+          git push origin v${VERSION_NAME}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
