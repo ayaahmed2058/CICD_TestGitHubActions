@@ -42,7 +42,7 @@ jobs:
   build:
     needs: test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+    if: github.ref == 'refs/heads/main'
 
     steps:
       - name: Checkout code
@@ -138,7 +138,7 @@ jobs:
         run: |
           firebase appdistribution:distribute app/build/outputs/apk/release/app-release.apk \
             --app ${{ secrets.FIREBASE_APP_ID }} \
-            --testers "ayaahmed75383@gmail.com" \
+            --groups "testers" \
             --release-notes "New Release v${{ github.run_number }}" \
             --debug
 
