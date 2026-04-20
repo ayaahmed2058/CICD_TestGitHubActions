@@ -138,7 +138,7 @@ jobs:
         run: |
           firebase appdistribution:distribute app/build/outputs/apk/release/app-release.apk \
             --app ${{ secrets.FIREBASE_APP_ID }} \
-            --testers "emankhaled1196@gmail.com,ma.abdalla82@gmail.com" \
+            --testers "ayaahmed75383@gmail.com" \
             --release-notes "New Release v${{ github.run_number }}" \
             --debug
 
